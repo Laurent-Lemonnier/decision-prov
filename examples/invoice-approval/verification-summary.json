@@ -1,0 +1,18 @@
+{
+ "about": "What the Standard's reference checks reported on the three documents, run on 2026-10-25 with the extensions at their versions then (action binding 0.3.0, signatures 0.2.0). The exporter repeats the person_approval result as dprov:verification; it verifies nothing itself.",
+ "record_seal_hash": "e4adee54d9314c58b10b61487d21c895d8ea76652d26438285b49ae373b8213b",
+ "spec_digest": "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6",
+ "schema_errors": {
+  "decision_record": [],
+  "action_binding_attachment": [],
+  "signatures_attachment": [],
+  "trust_policy": []
+ },
+ "action_binding": null,
+ "person_approval": {
+  "signature": "verified",
+  "subject": "verified",
+  "key_state": "verified",
+  "identity": "verified"
+ }
+}

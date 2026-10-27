@@ -1,0 +1,188 @@
+@prefix dprov: <https://w3id.org/decision-prov#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<urn:example:attachment:DR-2026-0901> a prov:Entity,
+        dprov:ActionBindingAttachment ;
+    dprov:actionSpecification <urn:example:spec:6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6> ;
+    dprov:forDecision <urn:example:decision:DR-2026-0901> ;
+    dprov:profile "dps-action-binding" ;
+    dprov:profileVersion "0.3.0" ;
+    dprov:stage <urn:example:stage:DR-2026-0901:c1>,
+        <urn:example:stage:DR-2026-0901:o1>,
+        <urn:example:stage:DR-2026-0901:p1>,
+        <urn:example:stage:DR-2026-0901:q1>,
+        <urn:example:stage:DR-2026-0901:r1>,
+        <urn:example:stage:DR-2026-0901:v1>,
+        <urn:example:stage:DR-2026-0901:x1> .
+
+<urn:example:signatures:DR-2026-0901> a prov:Entity ;
+    dprov:personSignature <urn:example:approval:DR-2026-0901:o1:0> ;
+    dprov:profile "dps-signatures" ;
+    dprov:profileVersion "0.2.0" .
+
+<urn:example:affirmation:DR-2026-0901> a prov:Activity ;
+    prov:endedAtTime "2026-10-24T09:12:00+00:00"^^xsd:dateTime ;
+    prov:wasAssociatedWith <urn:example:agent:person:billing-lead> ;
+    dprov:method "person_approval signature over the Luce payload hash" .
+
+<urn:example:agent:owner:camille-exemple> a prov:Person ;
+    rdfs:label "Camille Exemple" ;
+    dprov:role "Billing lead" .
+
+<urn:example:agent:system:pria-luce> a prov:SoftwareAgent ;
+    rdfs:label "pria-luce" ;
+    dprov:deployerRolePointer <urn:example:role:billing-drafting> ;
+    dprov:version "luce-1.0-candidate" .
+
+<urn:example:approval:DR-2026-0901:o1:0> a prov:Entity,
+        dprov:PersonApproval ;
+    prov:generatedAtTime "2026-10-24T09:12:00+00:00"^^xsd:dateTime ;
+    prov:wasAttributedTo <urn:example:agent:person:billing-lead> ;
+    dprov:approvedSpecDigest "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6" ;
+    dprov:assertion "person_approval" ;
+    dprov:forDecision <urn:example:decision:DR-2026-0901> ;
+    dprov:outcome "approved" ;
+    dprov:profile "dps-signatures" ;
+    dprov:profileVersion "0.2.0" ;
+    dprov:shownSpecDigest "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6" ;
+    dprov:shownViewDigest "848c35b875094c64ac9414a92e52582d8e01362b0cf1869c327ed8acdf7bfb1d" ;
+    dprov:signature [ dprov:algorithm "Ed25519" ;
+            dprov:keyRef "person-billing-lead-1" ;
+            dprov:valueBase64 "UujLh4eFdV30MaexA8XEYQUuLn8D98pb8oTFk2b2/hZyey6pHVoTUlQ3Uu7OmoRUpjQqlUlYitunBlK2o3bSCA==" ] ;
+    dprov:stageId "urn:example:stage:DR-2026-0901:o1" ;
+    dprov:verification "verified" .
+
+<urn:example:spec:6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6> a prov:Entity,
+        dprov:ActionSpecification ;
+    rdfs:comment [ dprov:input_version_refs "luce-payload-hash:sha256:8cb9e3d62c760b53884f119db8e4a5359e9ae0c56153422436a14d437035aab1",
+                "luce:example/invoice" ;
+            dprov:operation "luce.program.execute" ;
+            dprov:policy_version "luce-1.0-candidate" ;
+            dprov:target "luce:example/invoice" ] ;
+    dprov:representation [ dprov:kind "original_bytes" ;
+            dprov:mediaType "application/json" ] ;
+    dprov:specDigest "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6" .
+
+<urn:example:stage:DR-2026-0901:r1> a prov:Activity,
+        dprov:ResultStage,
+        dprov:Stage ;
+    prov:endedAtTime "2026-10-24T09:12:31+00:00"^^xsd:dateTime ;
+    prov:wasInformedBy <urn:example:stage:DR-2026-0901:x1> ;
+    dprov:basis "target_response" ;
+    dprov:evidenceRef "luce:read-backs:company_verified,invoice_verified" ;
+    dprov:kind "result" ;
+    dprov:observed "succeeded" ;
+    dprov:stageId "r1" .
+
+<urn:example:decision:DR-2026-0901> a prov:Entity,
+        dprov:DecisionRecord ;
+    prov:generatedAtTime "2026-10-24T09:00:00+00:00"^^xsd:dateTime ;
+    prov:wasAttributedTo <urn:example:agent:owner:camille-exemple> ;
+    dprov:accountableOwnerSignoff [ prov:generatedAtTime "2026-10-24T09:20:00+00:00"^^xsd:dateTime ;
+            prov:wasAttributedTo <person:billing-lead> ] ;
+    dprov:affirmedBy <urn:example:affirmation:DR-2026-0901> ;
+    dprov:altitude "team-leader" ;
+    dprov:assumptionDependedOn "The amount excluding tax agreed by e-mail is 250 EUR." ;
+    dprov:charterId "CH-EXAMPLE-BILLING-1" ;
+    dprov:closedAt "2026-10-24T09:20:00+00:00"^^xsd:dateTime ;
+    dprov:consentPosture [ dprov:postureClass "not-applicable: business-to-business billing data only" ] ;
+    dprov:contextAtDecision "The work was delivered; the client exists or is created with its exact SIRET; the invoice must be issued before the due date agreed by e-mail." ;
+    dprov:decisionClass "billing" ;
+    dprov:decisionId "DR-2026-0901" ;
+    dprov:decisionStatement "Invoice Atelier Exemple SARL (SIRET 12345678901234) 250 EUR excluding tax, 300 EUR including tax, due 2026-10-25, unpaid, by running the confirmed Luce program example.invoice.create_unpaid on the inputs whose digest the attachment names." ;
+    dprov:dispatchMode "mode-1-with-embedded-mode-2-summary" ;
+    dprov:draftedBy <urn:example:agent:system:pria-luce> ;
+    dprov:modeClassificationAttestation [ dprov:attestation_language_version "v5.0" ;
+            dprov:attestation_text_signed "I attest that this decision record was dispatched in mode-1 with an embedded mode-2 summary under charter CH-EXAMPLE-BILLING-1: the PRIA runtime prepared the confirmed Luce program and its inputs; I reviewed them as shown, weighed the three options recorded here, signed with my own key the exact payload whose digest the attachment names, and I am the accountable owner of this decision as an employee." ;
+            dprov:attestation_timestamp "2026-10-24T09:20:00Z" ;
+            dprov:attestor_capacity "employee" ;
+            dprov:attestor_employer "Example SARL" ;
+            dprov:attestor_full_name "Camille Exemple" ;
+            dprov:attestor_role_title "Billing lead" ;
+            dprov:jurisdiction "EU" ] ;
+    dprov:optionConsidered ( "Issue the invoice now through the confirmed program (chosen): exact client, read back, receipts kept." "Issue it by hand in the accounting tool: no read-back and no receipt, so no proof of what was sent." "Wait for the monthly batch: the agreed due date would pass." ) ;
+    dprov:reDecisionTrigger "Any read-back that differs from the confirmed version, or an uncertain effect receipt." ;
+    dprov:recordLocation "urn:example:decision-records:DR-2026-0901" ;
+    dprov:recordState "closed" ;
+    dprov:recordType "decision" ;
+    dprov:requiredInputUsed "SIRET checked in the public register",
+        "delivery note 2026-10-22" ;
+    dprov:sealAlgorithm "SHA-256" ;
+    dprov:sealHash "e4adee54d9314c58b10b61487d21c895d8ea76652d26438285b49ae373b8213b" ;
+    dprov:successCriterion "The invoice is read back with 300 EUR including tax, due 2026-10-25, unpaid." .
+
+<urn:example:service:pria-runtime> a prov:SoftwareAgent .
+
+<urn:example:stage:DR-2026-0901:c1> a prov:Activity,
+        dprov:RecheckStage,
+        dprov:Stage ;
+    prov:endedAtTime "2026-10-24T09:12:06+00:00"^^xsd:dateTime ;
+    prov:wasInformedBy <urn:example:stage:DR-2026-0901:q1> ;
+    dprov:authoritySourceRef "luce:effect-boundary:plan-rederived:sha256:67f92129fe28930d25eed87840313ec517872da8e2cbfc400befb9538bbed739" ;
+    dprov:kind "recheck" ;
+    dprov:recheckResult "authorised" ;
+    dprov:stageId "c1" .
+
+<urn:example:stage:DR-2026-0901:o1> a prov:Activity,
+        dprov:OutcomeStage,
+        dprov:Stage ;
+    prov:endedAtTime "2026-10-24T09:12:00+00:00"^^xsd:dateTime ;
+    prov:wasAssociatedWith <urn:example:agent:person:billing-lead> ;
+    prov:wasInformedBy <urn:example:stage:DR-2026-0901:v1> ;
+    dprov:approvedSpecDigest "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6" ;
+    dprov:authority [ dprov:authorityRef <urn:example:charter:CH-EXAMPLE-BILLING-1#invoice-approval> ] ;
+    dprov:kind "outcome" ;
+    dprov:method "person_approval signature over the Luce payload hash" ;
+    dprov:outcome "approved" ;
+    dprov:stageId "o1" .
+
+<urn:example:stage:DR-2026-0901:p1> a prov:Activity,
+        dprov:ProposalStage,
+        dprov:Stage ;
+    rdfs:label "pria-luce" ;
+    prov:endedAtTime "2026-10-24T09:05:00+00:00"^^xsd:dateTime ;
+    dprov:deployerRolePointer <urn:example:role:billing-drafting> ;
+    dprov:kind "proposal" ;
+    dprov:origin "ai" ;
+    dprov:specDigest "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6" ;
+    dprov:stageId "p1" ;
+    dprov:version "luce-1.0-candidate" .
+
+<urn:example:stage:DR-2026-0901:v1> a prov:Activity,
+        dprov:ReviewStage,
+        dprov:Stage ;
+    prov:endedAtTime "2026-10-24T09:10:00+00:00"^^xsd:dateTime ;
+    prov:wasAssociatedWith <urn:example:agent:person:billing-lead> ;
+    prov:wasInformedBy <urn:example:stage:DR-2026-0901:p1> ;
+    dprov:kind "review" ;
+    dprov:shownSpecDigest "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6" ;
+    dprov:shownViewDigest "848c35b875094c64ac9414a92e52582d8e01362b0cf1869c327ed8acdf7bfb1d" ;
+    dprov:stageId "v1" .
+
+<urn:example:stage:DR-2026-0901:x1> a prov:Activity,
+        dprov:AttemptStage,
+        dprov:Stage ;
+    prov:endedAtTime "2026-10-24T09:12:07+00:00"^^xsd:dateTime ;
+    prov:wasAssociatedWith <urn:example:service:pria-runtime> ;
+    prov:wasInformedBy <urn:example:stage:DR-2026-0901:c1>,
+        <urn:example:stage:DR-2026-0901:q1> ;
+    dprov:kind "attempt" ;
+    dprov:specDigest "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6" ;
+    dprov:stageId "x1" .
+
+<urn:example:stage:DR-2026-0901:q1> a prov:Activity,
+        dprov:RequestStage,
+        dprov:Stage ;
+    prov:endedAtTime "2026-10-24T09:12:05+00:00"^^xsd:dateTime ;
+    prov:wasAssociatedWith <urn:example:service:pria-runtime> ;
+    prov:wasInformedBy <urn:example:stage:DR-2026-0901:o1> ;
+    dprov:kind "request" ;
+    dprov:requestId "luce:idem:invoice-0901" ;
+    dprov:specDigest "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6" ;
+    dprov:stageId "q1" .
+
+<urn:example:agent:person:billing-lead> a prov:Person .
+

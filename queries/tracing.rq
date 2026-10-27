@@ -1,0 +1,11 @@
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dprov: <https://w3id.org/decision-prov#>
+# For each attempt, a person_approval whose approved digest is the attempt's digest, which the Standard's reference
+# check reported verified, attributed to a prov:Person. The query finds what the records state and what the verifier
+# reported; it does not show that any condition of human control is met.
+SELECT ?attempt ?person WHERE {
+  ?attempt a dprov:AttemptStage ; dprov:specDigest ?digest .
+  ?approval a dprov:PersonApproval ; dprov:approvedSpecDigest ?digest ; dprov:verification "verified" ;
+            prov:wasAttributedTo ?person .
+  ?person a prov:Person .
+}

@@ -1,0 +1,205 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "prov": "http://www.w3.org/ns/prov#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "dprov": "https://w3id.org/decision-prov#",
+    "@vocab": "https://w3id.org/decision-prov#",
+    "DecisionRecord": "dprov:DecisionRecord",
+    "ActionBindingAttachment": "dprov:ActionBindingAttachment",
+    "ActionSpecification": "dprov:ActionSpecification",
+    "Stage": "dprov:Stage",
+    "PersonApproval": "dprov:PersonApproval",
+    "Person": "prov:Person",
+    "Organization": "prov:Organization",
+    "SoftwareAgent": "prov:SoftwareAgent",
+    "Entity": "prov:Entity",
+    "Activity": "prov:Activity",
+    "Plan": "prov:Plan",
+    "decision_id": "dprov:decisionId",
+    "charter_id": {
+      "@id": "dprov:charterId"
+    },
+    "record_type": "dprov:recordType",
+    "record_state": "dprov:recordState",
+    "dispatch_mode": "dprov:dispatchMode",
+    "altitude": "dprov:altitude",
+    "decision_class": "dprov:decisionClass",
+    "decision_statement": "dprov:decisionStatement",
+    "context_at_decision": "dprov:contextAtDecision",
+    "options_considered": {
+      "@id": "dprov:optionConsidered",
+      "@container": "@list"
+    },
+    "required_inputs_used": {
+      "@id": "dprov:requiredInputUsed",
+      "@container": "@set"
+    },
+    "assumptions_depended_on": {
+      "@id": "dprov:assumptionDependedOn",
+      "@container": "@set"
+    },
+    "success_criteria": {
+      "@id": "dprov:successCriterion",
+      "@container": "@set"
+    },
+    "created_at": {
+      "@id": "prov:generatedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "closed_at": {
+      "@id": "dprov:closedAt",
+      "@type": "xsd:dateTime"
+    },
+    "supersedes": {
+      "@id": "prov:wasRevisionOf",
+      "@type": "@id"
+    },
+    "re_decision_trigger": "dprov:reDecisionTrigger",
+    "seal_hash": "dprov:sealHash",
+    "seal_algorithm": "dprov:sealAlgorithm",
+    "record_location": "dprov:recordLocation",
+    "accountable_owner": {
+      "@id": "prov:wasAttributedTo",
+      "@type": "@id"
+    },
+    "full_name": "rdfs:label",
+    "role": "dprov:role",
+    "employer": {
+      "@id": "prov:actedOnBehalfOf",
+      "@type": "@id"
+    },
+    "drafting_authority": {
+      "@id": "dprov:draftedBy",
+      "@type": "@id"
+    },
+    "system_name": "rdfs:label",
+    "version": "dprov:version",
+    "deployer_role_pointer": {
+      "@id": "dprov:deployerRolePointer",
+      "@type": "@id"
+    },
+    "affirmation_record": {
+      "@id": "dprov:affirmedBy",
+      "@type": "@id"
+    },
+    "timestamp": {
+      "@id": "prov:endedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "actor_identity": {
+      "@id": "prov:wasAssociatedWith",
+      "@type": "@id"
+    },
+    "method": "dprov:method",
+    "consent_posture": "dprov:consentPosture",
+    "posture_class": "dprov:postureClass",
+    "mode_classification_attestation": "dprov:modeClassificationAttestation",
+    "accountable_owner_signoff": "dprov:accountableOwnerSignoff",
+    "profile": "dprov:profile",
+    "profile_version": "dprov:profileVersion",
+    "for_decision": {
+      "@id": "dprov:forDecision",
+      "@type": "@id"
+    },
+    "action_specifications": {
+      "@id": "dprov:actionSpecification",
+      "@container": "@set"
+    },
+    "spec_digest": "dprov:specDigest",
+    "representation": "dprov:representation",
+    "kind": "dprov:kind",
+    "media_type": "dprov:mediaType",
+    "summary": "rdfs:comment",
+    "stages": {
+      "@id": "dprov:stage",
+      "@container": "@set"
+    },
+    "stage_id": "dprov:stageId",
+    "at": {
+      "@id": "prov:endedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "origin": "dprov:origin",
+    "reviewer_ref": {
+      "@id": "prov:wasAssociatedWith",
+      "@type": "@id"
+    },
+    "actor_ref": {
+      "@id": "prov:wasAssociatedWith",
+      "@type": "@id"
+    },
+    "requested_by": {
+      "@id": "prov:wasAssociatedWith",
+      "@type": "@id"
+    },
+    "executor_ref": {
+      "@id": "prov:wasAssociatedWith",
+      "@type": "@id"
+    },
+    "proposal_ref": {
+      "@id": "prov:wasInformedBy",
+      "@type": "@id"
+    },
+    "review_ref": {
+      "@id": "prov:wasInformedBy",
+      "@type": "@id"
+    },
+    "authorised_by": {
+      "@id": "prov:wasInformedBy",
+      "@type": "@id"
+    },
+    "request_ref": {
+      "@id": "prov:wasInformedBy",
+      "@type": "@id"
+    },
+    "recheck_ref": {
+      "@id": "prov:wasInformedBy",
+      "@type": "@id"
+    },
+    "attempt_ref": {
+      "@id": "prov:wasInformedBy",
+      "@type": "@id"
+    },
+    "shown_spec_digest": "dprov:shownSpecDigest",
+    "shown_view_digest": "dprov:shownViewDigest",
+    "approved_spec_digest": "dprov:approvedSpecDigest",
+    "outcome": "dprov:outcome",
+    "authority": "dprov:authority",
+    "authority_ref": {
+      "@id": "dprov:authorityRef",
+      "@type": "@id"
+    },
+    "authority_source_ref": "dprov:authoritySourceRef",
+    "request_id": "dprov:requestId",
+    "result": "dprov:recheckResult",
+    "observed": "dprov:observed",
+    "basis": "dprov:basis",
+    "evidence_ref": "dprov:evidenceRef",
+    "trace_refs": {
+      "@id": "dprov:traceRef",
+      "@container": "@set"
+    },
+    "rationale": "dprov:rationale",
+    "core_ref": "dprov:coreRef",
+    "person_signatures": {
+      "@id": "dprov:personSignature",
+      "@container": "@set"
+    },
+    "assertion": "dprov:assertion",
+    "signed_at": {
+      "@id": "prov:generatedAtTime",
+      "@type": "xsd:dateTime"
+    },
+    "signed_by": {
+      "@id": "prov:wasAttributedTo",
+      "@type": "@id"
+    },
+    "signature": "dprov:signature",
+    "algorithm": "dprov:algorithm",
+    "key_ref": "dprov:keyRef",
+    "value_b64": "dprov:valueBase64",
+    "verification": "dprov:verification"
+  }
+}

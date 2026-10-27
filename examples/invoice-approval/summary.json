@@ -1,0 +1,14 @@
+{
+ "base": "urn:example:",
+ "triples": 178,
+ "attempts": [
+  "urn:example:stage:DR-2026-0901:x1"
+ ],
+ "traced_to": {
+  "urn:example:stage:DR-2026-0901:x1": "urn:example:agent:person:billing-lead"
+ },
+ "every_attempt_traced": true,
+ "full_stage_chain_found": true,
+ "negative_control_finds_no_one": true,
+ "note": "The graph describes; the export and its signatures prove. The queries find what the records state and what the verifier reported, not that any condition is met. dprov:verification repeats verification-summary.json."
+}

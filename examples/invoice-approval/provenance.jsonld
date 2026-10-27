@@ -1,0 +1,474 @@
+{
+ "@context": {
+  "@version": 1.1,
+  "prov": "http://www.w3.org/ns/prov#",
+  "xsd": "http://www.w3.org/2001/XMLSchema#",
+  "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+  "dprov": "https://w3id.org/decision-prov#",
+  "@vocab": "https://w3id.org/decision-prov#",
+  "DecisionRecord": "dprov:DecisionRecord",
+  "ActionBindingAttachment": "dprov:ActionBindingAttachment",
+  "ActionSpecification": "dprov:ActionSpecification",
+  "Stage": "dprov:Stage",
+  "PersonApproval": "dprov:PersonApproval",
+  "Person": "prov:Person",
+  "Organization": "prov:Organization",
+  "SoftwareAgent": "prov:SoftwareAgent",
+  "Entity": "prov:Entity",
+  "Activity": "prov:Activity",
+  "Plan": "prov:Plan",
+  "decision_id": "dprov:decisionId",
+  "charter_id": {
+   "@id": "dprov:charterId"
+  },
+  "record_type": "dprov:recordType",
+  "record_state": "dprov:recordState",
+  "dispatch_mode": "dprov:dispatchMode",
+  "altitude": "dprov:altitude",
+  "decision_class": "dprov:decisionClass",
+  "decision_statement": "dprov:decisionStatement",
+  "context_at_decision": "dprov:contextAtDecision",
+  "options_considered": {
+   "@id": "dprov:optionConsidered",
+   "@container": "@list"
+  },
+  "required_inputs_used": {
+   "@id": "dprov:requiredInputUsed",
+   "@container": "@set"
+  },
+  "assumptions_depended_on": {
+   "@id": "dprov:assumptionDependedOn",
+   "@container": "@set"
+  },
+  "success_criteria": {
+   "@id": "dprov:successCriterion",
+   "@container": "@set"
+  },
+  "created_at": {
+   "@id": "prov:generatedAtTime",
+   "@type": "xsd:dateTime"
+  },
+  "closed_at": {
+   "@id": "dprov:closedAt",
+   "@type": "xsd:dateTime"
+  },
+  "supersedes": {
+   "@id": "prov:wasRevisionOf",
+   "@type": "@id"
+  },
+  "re_decision_trigger": "dprov:reDecisionTrigger",
+  "seal_hash": "dprov:sealHash",
+  "seal_algorithm": "dprov:sealAlgorithm",
+  "record_location": "dprov:recordLocation",
+  "accountable_owner": {
+   "@id": "prov:wasAttributedTo",
+   "@type": "@id"
+  },
+  "full_name": "rdfs:label",
+  "role": "dprov:role",
+  "employer": {
+   "@id": "prov:actedOnBehalfOf",
+   "@type": "@id"
+  },
+  "drafting_authority": {
+   "@id": "dprov:draftedBy",
+   "@type": "@id"
+  },
+  "system_name": "rdfs:label",
+  "version": "dprov:version",
+  "deployer_role_pointer": {
+   "@id": "dprov:deployerRolePointer",
+   "@type": "@id"
+  },
+  "affirmation_record": {
+   "@id": "dprov:affirmedBy",
+   "@type": "@id"
+  },
+  "timestamp": {
+   "@id": "prov:endedAtTime",
+   "@type": "xsd:dateTime"
+  },
+  "actor_identity": {
+   "@id": "prov:wasAssociatedWith",
+   "@type": "@id"
+  },
+  "method": "dprov:method",
+  "consent_posture": "dprov:consentPosture",
+  "posture_class": "dprov:postureClass",
+  "mode_classification_attestation": "dprov:modeClassificationAttestation",
+  "accountable_owner_signoff": "dprov:accountableOwnerSignoff",
+  "profile": "dprov:profile",
+  "profile_version": "dprov:profileVersion",
+  "for_decision": {
+   "@id": "dprov:forDecision",
+   "@type": "@id"
+  },
+  "action_specifications": {
+   "@id": "dprov:actionSpecification",
+   "@container": "@set"
+  },
+  "spec_digest": "dprov:specDigest",
+  "representation": "dprov:representation",
+  "kind": "dprov:kind",
+  "media_type": "dprov:mediaType",
+  "summary": "rdfs:comment",
+  "stages": {
+   "@id": "dprov:stage",
+   "@container": "@set"
+  },
+  "stage_id": "dprov:stageId",
+  "at": {
+   "@id": "prov:endedAtTime",
+   "@type": "xsd:dateTime"
+  },
+  "origin": "dprov:origin",
+  "reviewer_ref": {
+   "@id": "prov:wasAssociatedWith",
+   "@type": "@id"
+  },
+  "actor_ref": {
+   "@id": "prov:wasAssociatedWith",
+   "@type": "@id"
+  },
+  "requested_by": {
+   "@id": "prov:wasAssociatedWith",
+   "@type": "@id"
+  },
+  "executor_ref": {
+   "@id": "prov:wasAssociatedWith",
+   "@type": "@id"
+  },
+  "proposal_ref": {
+   "@id": "prov:wasInformedBy",
+   "@type": "@id"
+  },
+  "review_ref": {
+   "@id": "prov:wasInformedBy",
+   "@type": "@id"
+  },
+  "authorised_by": {
+   "@id": "prov:wasInformedBy",
+   "@type": "@id"
+  },
+  "request_ref": {
+   "@id": "prov:wasInformedBy",
+   "@type": "@id"
+  },
+  "recheck_ref": {
+   "@id": "prov:wasInformedBy",
+   "@type": "@id"
+  },
+  "attempt_ref": {
+   "@id": "prov:wasInformedBy",
+   "@type": "@id"
+  },
+  "shown_spec_digest": "dprov:shownSpecDigest",
+  "shown_view_digest": "dprov:shownViewDigest",
+  "approved_spec_digest": "dprov:approvedSpecDigest",
+  "outcome": "dprov:outcome",
+  "authority": "dprov:authority",
+  "authority_ref": {
+   "@id": "dprov:authorityRef",
+   "@type": "@id"
+  },
+  "authority_source_ref": "dprov:authoritySourceRef",
+  "request_id": "dprov:requestId",
+  "result": "dprov:recheckResult",
+  "observed": "dprov:observed",
+  "basis": "dprov:basis",
+  "evidence_ref": "dprov:evidenceRef",
+  "trace_refs": {
+   "@id": "dprov:traceRef",
+   "@container": "@set"
+  },
+  "rationale": "dprov:rationale",
+  "core_ref": "dprov:coreRef",
+  "person_signatures": {
+   "@id": "dprov:personSignature",
+   "@container": "@set"
+  },
+  "assertion": "dprov:assertion",
+  "signed_at": {
+   "@id": "prov:generatedAtTime",
+   "@type": "xsd:dateTime"
+  },
+  "signed_by": {
+   "@id": "prov:wasAttributedTo",
+   "@type": "@id"
+  },
+  "signature": "dprov:signature",
+  "algorithm": "dprov:algorithm",
+  "key_ref": "dprov:keyRef",
+  "value_b64": "dprov:valueBase64",
+  "verification": "dprov:verification"
+ },
+ "@graph": [
+  {
+   "decision_id": "DR-2026-0901",
+   "charter_id": "CH-EXAMPLE-BILLING-1",
+   "record_type": "decision",
+   "record_state": "closed",
+   "dispatch_mode": "mode-1-with-embedded-mode-2-summary",
+   "created_at": "2026-10-24T09:00:00Z",
+   "altitude": "team-leader",
+   "decision_statement": "Invoice Atelier Exemple SARL (SIRET 12345678901234) 250 EUR excluding tax, 300 EUR including tax, due 2026-10-25, unpaid, by running the confirmed Luce program example.invoice.create_unpaid on the inputs whose digest the attachment names.",
+   "context_at_decision": "The work was delivered; the client exists or is created with its exact SIRET; the invoice must be issued before the due date agreed by e-mail.",
+   "options_considered": [
+    "Issue the invoice now through the confirmed program (chosen): exact client, read back, receipts kept.",
+    "Issue it by hand in the accounting tool: no read-back and no receipt, so no proof of what was sent.",
+    "Wait for the monthly batch: the agreed due date would pass."
+   ],
+   "required_inputs_used": [
+    "delivery note 2026-10-22",
+    "SIRET checked in the public register"
+   ],
+   "assumptions_depended_on": [
+    "The amount excluding tax agreed by e-mail is 250 EUR."
+   ],
+   "success_criteria": [
+    "The invoice is read back with 300 EUR including tax, due 2026-10-25, unpaid."
+   ],
+   "accountable_owner": {
+    "@id": "urn:example:agent:owner:camille-exemple",
+    "@type": "Person",
+    "full_name": "Camille Exemple",
+    "role": "Billing lead",
+    "employer": {
+     "@id": "urn:example:agent:org:Example SARL",
+     "@type": "Organization",
+     "rdfs:label": "Example SARL"
+    }
+   },
+   "decision_class": "billing",
+   "drafting_authority": {
+    "@id": "urn:example:agent:system:pria-luce",
+    "@type": "SoftwareAgent",
+    "deployer_role_pointer": "urn:example:role:billing-drafting",
+    "system_name": "pria-luce",
+    "version": "luce-1.0-candidate"
+   },
+   "consent_posture": {
+    "posture_class": "not-applicable: business-to-business billing data only"
+   },
+   "affirmation_record": {
+    "@id": "urn:example:affirmation:DR-2026-0901",
+    "@type": "Activity",
+    "timestamp": "2026-10-24T09:12:00Z",
+    "method": "person_approval signature over the Luce payload hash",
+    "actor_identity": "urn:example:agent:person:billing-lead"
+   },
+   "mode_classification_attestation": {
+    "attestor_full_name": "Camille Exemple",
+    "attestor_role_title": "Billing lead",
+    "attestor_employer": "Example SARL",
+    "attestation_timestamp": "2026-10-24T09:20:00Z",
+    "jurisdiction": "EU",
+    "attestation_language_version": "v5.0",
+    "attestor_capacity": "employee",
+    "attestation_text_signed": "I attest that this decision record was dispatched in mode-1 with an embedded mode-2 summary under charter CH-EXAMPLE-BILLING-1: the PRIA runtime prepared the confirmed Luce program and its inputs; I reviewed them as shown, weighed the three options recorded here, signed with my own key the exact payload whose digest the attachment names, and I am the accountable owner of this decision as an employee."
+   },
+   "accountable_owner_signoff": {
+    "signed_by": "person:billing-lead",
+    "signed_at": "2026-10-24T09:20:00Z"
+   },
+   "re_decision_trigger": "Any read-back that differs from the confirmed version, or an uncertain effect receipt.",
+   "record_location": "urn:example:decision-records:DR-2026-0901",
+   "seal_algorithm": "SHA-256",
+   "closed_at": "2026-10-24T09:20:00Z",
+   "seal_hash": "e4adee54d9314c58b10b61487d21c895d8ea76652d26438285b49ae373b8213b",
+   "@id": "urn:example:decision:DR-2026-0901",
+   "@type": [
+    "DecisionRecord",
+    "Entity"
+   ]
+  },
+  {
+   "profile": "dps-action-binding",
+   "profile_version": "0.3.0",
+   "action_specifications": [
+    {
+     "spec_digest": "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6",
+     "representation": {
+      "kind": "original_bytes",
+      "media_type": "application/json"
+     },
+     "summary": {
+      "operation": "luce.program.execute",
+      "target": "luce:example/invoice",
+      "policy_version": "luce-1.0-candidate",
+      "input_version_refs": [
+       "luce:example/invoice",
+       "luce-payload-hash:sha256:8cb9e3d62c760b53884f119db8e4a5359e9ae0c56153422436a14d437035aab1"
+      ]
+     },
+     "@id": "urn:example:spec:6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6",
+     "@type": [
+      "ActionSpecification",
+      "Entity"
+     ]
+    }
+   ],
+   "stages": [
+    {
+     "stage_id": "p1",
+     "kind": "proposal",
+     "at": "2026-10-24T09:05:00Z",
+     "origin": "ai",
+     "spec_digest": "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6",
+     "deployer_role_pointer": "urn:example:role:billing-drafting",
+     "system_name": "pria-luce",
+     "version": "luce-1.0-candidate",
+     "@id": "urn:example:stage:DR-2026-0901:p1",
+     "@type": [
+      "Stage",
+      "Activity",
+      "dprov:ProposalStage"
+     ]
+    },
+    {
+     "stage_id": "v1",
+     "kind": "review",
+     "at": "2026-10-24T09:10:00Z",
+     "reviewer_ref": {
+      "@id": "urn:example:agent:person:billing-lead",
+      "@type": "Person"
+     },
+     "shown_spec_digest": "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6",
+     "shown_view_digest": "848c35b875094c64ac9414a92e52582d8e01362b0cf1869c327ed8acdf7bfb1d",
+     "proposal_ref": "urn:example:stage:DR-2026-0901:p1",
+     "@id": "urn:example:stage:DR-2026-0901:v1",
+     "@type": [
+      "Stage",
+      "Activity",
+      "dprov:ReviewStage"
+     ]
+    },
+    {
+     "stage_id": "o1",
+     "kind": "outcome",
+     "at": "2026-10-24T09:12:00Z",
+     "review_ref": "urn:example:stage:DR-2026-0901:v1",
+     "outcome": "approved",
+     "actor_ref": {
+      "@id": "urn:example:agent:person:billing-lead",
+      "@type": "Person"
+     },
+     "method": "person_approval signature over the Luce payload hash",
+     "approved_spec_digest": "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6",
+     "authority": {
+      "authority_ref": "urn:example:charter:CH-EXAMPLE-BILLING-1#invoice-approval"
+     },
+     "@id": "urn:example:stage:DR-2026-0901:o1",
+     "@type": [
+      "Stage",
+      "Activity",
+      "dprov:OutcomeStage"
+     ]
+    },
+    {
+     "stage_id": "q1",
+     "kind": "request",
+     "at": "2026-10-24T09:12:05Z",
+     "request_id": "luce:idem:invoice-0901",
+     "authorised_by": "urn:example:stage:DR-2026-0901:o1",
+     "spec_digest": "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6",
+     "requested_by": {
+      "@id": "urn:example:service:pria-runtime",
+      "@type": "SoftwareAgent"
+     },
+     "@id": "urn:example:stage:DR-2026-0901:q1",
+     "@type": [
+      "Stage",
+      "Activity",
+      "dprov:RequestStage"
+     ]
+    },
+    {
+     "stage_id": "c1",
+     "kind": "recheck",
+     "at": "2026-10-24T09:12:06Z",
+     "request_ref": "urn:example:stage:DR-2026-0901:q1",
+     "result": "authorised",
+     "authority_source_ref": "luce:effect-boundary:plan-rederived:sha256:67f92129fe28930d25eed87840313ec517872da8e2cbfc400befb9538bbed739",
+     "@id": "urn:example:stage:DR-2026-0901:c1",
+     "@type": [
+      "Stage",
+      "Activity",
+      "dprov:RecheckStage"
+     ]
+    },
+    {
+     "stage_id": "x1",
+     "kind": "attempt",
+     "at": "2026-10-24T09:12:07Z",
+     "request_ref": "urn:example:stage:DR-2026-0901:q1",
+     "recheck_ref": "urn:example:stage:DR-2026-0901:c1",
+     "spec_digest": "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6",
+     "executor_ref": {
+      "@id": "urn:example:service:pria-runtime",
+      "@type": "SoftwareAgent"
+     },
+     "@id": "urn:example:stage:DR-2026-0901:x1",
+     "@type": [
+      "Stage",
+      "Activity",
+      "dprov:AttemptStage"
+     ]
+    },
+    {
+     "stage_id": "r1",
+     "kind": "result",
+     "at": "2026-10-24T09:12:31Z",
+     "attempt_ref": "urn:example:stage:DR-2026-0901:x1",
+     "observed": "succeeded",
+     "basis": "target_response",
+     "evidence_ref": "luce:read-backs:company_verified,invoice_verified",
+     "@id": "urn:example:stage:DR-2026-0901:r1",
+     "@type": [
+      "Stage",
+      "Activity",
+      "dprov:ResultStage"
+     ]
+    }
+   ],
+   "@id": "urn:example:attachment:DR-2026-0901",
+   "@type": [
+    "ActionBindingAttachment",
+    "Entity"
+   ],
+   "for_decision": "urn:example:decision:DR-2026-0901"
+  },
+  {
+   "profile": "dps-signatures",
+   "profile_version": "0.2.0",
+   "person_signatures": [
+    {
+     "profile": "dps-signatures",
+     "profile_version": "0.2.0",
+     "assertion": "person_approval",
+     "stage_id": "urn:example:stage:DR-2026-0901:o1",
+     "outcome": "approved",
+     "shown_spec_digest": "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6",
+     "shown_view_digest": "848c35b875094c64ac9414a92e52582d8e01362b0cf1869c327ed8acdf7bfb1d",
+     "approved_spec_digest": "6cdfcf49dbba35c4713f4ec1a692d790b55b1eecf0cb1618e028e1c9304338f6",
+     "signed_at": "2026-10-24T09:12:00Z",
+     "signature": {
+      "algorithm": "Ed25519",
+      "key_ref": "person-billing-lead-1",
+      "value_b64": "UujLh4eFdV30MaexA8XEYQUuLn8D98pb8oTFk2b2/hZyey6pHVoTUlQ3Uu7OmoRUpjQqlUlYitunBlK2o3bSCA=="
+     },
+     "@id": "urn:example:approval:DR-2026-0901:o1:0",
+     "@type": [
+      "PersonApproval",
+      "Entity"
+     ],
+     "for_decision": "urn:example:decision:DR-2026-0901",
+     "verification": "verified",
+     "signed_by": "urn:example:agent:person:billing-lead"
+    }
+   ],
+   "@id": "urn:example:signatures:DR-2026-0901",
+   "@type": "Entity"
+  }
+ ]
+}

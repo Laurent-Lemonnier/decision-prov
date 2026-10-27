@@ -1,0 +1,10 @@
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX dprov: <https://w3id.org/decision-prov#>
+# The whole stage chain of action binding, proposal to result, as a path of prov:wasInformedBy.
+SELECT ?result WHERE {
+  ?result a dprov:ResultStage ; prov:wasInformedBy ?attempt .
+  ?attempt prov:wasInformedBy ?recheck , ?request .
+  ?recheck a dprov:RecheckStage . ?request a dprov:RequestStage ; prov:wasInformedBy ?outcome .
+  ?outcome a dprov:OutcomeStage ; prov:wasInformedBy ?review . ?review a dprov:ReviewStage ; prov:wasInformedBy ?proposal .
+  ?proposal a dprov:ProposalStage .
+}
